@@ -13,7 +13,7 @@ namespace ConsoleDemo
                 .WriteTo.Console(Serilog.Events.LogEventLevel.Error)
                 .WriteTo.Seq("http://seq:5341")
                 .CreateLogger();
-            
+
             while (true)
             {
                 Console.WriteLine();

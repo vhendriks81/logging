@@ -1,27 +1,27 @@
 using System;
 using System.Diagnostics;
-using System.IO;
-using Destructurama;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Serilog;
+using WebApiDemo.Enrichment;
 
-namespace CQRSDemo
+namespace WebApiDemo
 {
     public class Program
     {
         public static int Main(string[] args)
         {
-            Activity.DefaultIdFormat = ActivityIdFormat.W3C;
-            var configuration = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json")
-                    .Build();
-                    
-            Log.Logger = new LoggerConfiguration()
-                .ReadFrom.Configuration(configuration) 
-                .Destructure.UsingAttributes()
+             Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
+                .Enrich.FromLogContext()
+                .Enrich.With<MachineNameEnricher>()
+                .WriteTo.Console()
+                .WriteTo.Seq("http://seq:5341", Serilog.Events.LogEventLevel.Information)
                 .CreateLogger();
 
             try
