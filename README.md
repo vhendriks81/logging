@@ -9,3 +9,5 @@ Follow these steps to open this sample in a container using the VS Code Remote -
 2. To use this repository clone this repository to your local filesystem.
    - Press <kbd>F1</kbd> and select the **Remote-Containers: Open Folder in Container...** command.
    - Select the cloned copy of this folder, wait for the container to start, and try things out!
+   - Open up a terminal, navigate to one of the demo folders and either type **dotnet run** or **dotnet watch run**
+
