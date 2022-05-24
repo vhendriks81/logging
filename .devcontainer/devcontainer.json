@@ -17,5 +17,7 @@
 		"editorconfig.editorconfig"
 	],
 
+  "forwardPorts": [3000, 3001, 5080],
+
 	"remoteUser": "vscode"
 }
